@@ -74,3 +74,17 @@ Finally had to stop brute forcing and learn something new.
 
 > Notes / Lessons learned: 
 - Used a lot of ChatGPT here — mainly to understand how Union-Find works and how Kruskal-style algorithms build connections incrementally.
+
+### Day 11 : Reactor
+
+Had to relearn recursion by hand. Then stop counting the same routes again.
+
+- **Part 1:** Build a dictionary of outgoing connections. Use recursive DFS to count all routes from `you` to `out`. Reaching `out` returns 1; each device adds up the counts from its neighbors.
+
+- **Part 2:** Start from `svr` and only count routes that visit both `fft` and `dac` before reaching `out`. Pass two booleans through the recursion to track those visits instead of keeping the whole path.
+
+> Notes / Lessons learned:
+
+- Used ChatGPT to revisit recursion and memoization. Each recursive call returns its count to the caller, which adds it to its own total.
+- Memoize with a hashmap (`dict`). The key is `(curr, has_fft, has_dac)` because reaching the same device with different visits can give different answers. Use the same key for lookup and storage.
+- This approach assumes no cycles. Different routes can meet at the same device and reuse the cached count without losing those separate routes.
