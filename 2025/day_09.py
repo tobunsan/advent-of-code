@@ -1,16 +1,17 @@
 """Solution for Day 9 2025."""
 
+from itertools import combinations
+
 import utils
 
 
 def solve(data):
     coords = [list(map(int, c.split(","))) for c in data]
     result = 0
-    for x1, y1 in coords:
-        for x2, y2 in coords:
-            x_area = abs(x1 - x2) + 1
-            y_area = abs(y1 - y2) + 1
-            result = max(result, x_area * y_area)
+    for (x1, y1), (x2, y2) in combinations(coords, 2):
+        x_area = abs(x1 - x2) + 1
+        y_area = abs(y1 - y2) + 1
+        result = max(result, x_area * y_area)
 
     return result
 
