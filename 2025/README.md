@@ -75,6 +75,22 @@ Finally had to stop brute forcing and learn something new.
 > Notes / Lessons learned: 
 - Used a lot of ChatGPT here — mainly to understand how Union-Find works and how Kruskal-style algorithms build connections incrementally.
 
+### Day 9 : Movie Theater
+
+Finally solved it by compressing the grid and flooding the outside.
+
+- **Part 1:** Try every pair of red tiles as opposite corners. Calculate the inclusive rectangle area with `(abs(x1 - x2) + 1) * (abs(y1 - y2) + 1)` and keep the largest.
+
+- **Part 2:** Compress the coordinates while preserving a position for each gap. Draw the polygon edges on the compressed grid, add an empty border, and flood fill from `(0, 0)` to identify exterior cells. Reject rectangles whose perimeter touches the exterior. Calculate areas using the original coordinates and skip candidates smaller than the current best.
+
+> Notes / Lessons learned:
+
+- Used ChatGPT for debugging guidance on compression, drawing edges, flood fill, and tracking the largest valid area.
+- Sorting does not remove duplicates; `sorted(set(values))` does. Map original coordinates to compressed positions and place gap markers between coordinates.
+- Points use `(column, row)`, but grid indexing and the exterior set use `(row, column)`. Update the previous point after drawing each edge and connect the last point back to the first.
+- Mark a flood-fill cell visited independently of whether it has valid neighbors. Padding the grid leaves a connected exterior to explore.
+- Sample verified: Part 1 returns **50** and Part 2 returns **24**.
+
 ### Day 11 : Reactor
 
 Had to relearn recursion by hand. Then stop counting the same routes again.
